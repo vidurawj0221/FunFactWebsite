@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .fact {
+            transition: opacity 0.5s ease;
+            opacity: 1;
+        }
+
+        .fact.hidden {
+            opacity: 0;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fun Facts</h1>
+        <p id="fact" class="fact">Click the button to see a fun fact!</p>
+        <button id="randomFactBtn">Show Random Fact</button>
+        <button id="shareBtn">Share on Twitter</button>
+    </div>
+    <script>
+        const facts = [
+            "Fact 1: The sky is blue.",
+            "Fact 2: Honey never spoils.",
+            "Fact 3: Bananas are berries.",
+            // Add more facts as needed
+        ];
+
+        document.getElementById('randomFactBtn').addEventListener('click', () => {
+            const factElement = document.getElementById('fact');
+            factElement.classList.add('hidden');
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * facts.length);
+                factElement.textContent = facts[randomIndex];
+                factElement.classList.remove('hidden');
+            }, 500);
+        });
+
+        document.getElementById('shareBtn').addEventListener('click', () => {
+            const fact = document.getElementById('fact').textContent;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(fact)}`;
+            window.open(twitterUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
